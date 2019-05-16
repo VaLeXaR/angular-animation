@@ -1,0 +1,28 @@
+<aa-todo-header></aa-todo-header>
+<section class="main">
+  <input
+    *ngIf="todos.length"
+    id="toggle-all"
+    class="toggle-all"
+    type="checkbox"
+    #toggleall
+    [checked]="hasCompleted()"
+    (click)="setAllTo(toggleall)"
+  >
+  <div *ngIf="loaded">
+    <ul class="todo-list">
+      <div *ngFor="let todo of todos; trackBy: trackById" @todoList [@.disabled]="disableAnimation">
+        <aa-todo-item
+          @todoItem
+          [todo]="todo"
+          (itemRemoved)="remove($event)"
+          (itemModified)="update($event)"
+        ></aa-todo-item>
+      </div>
+    </ul>
+  </div>
+  <div class="loader" *ngIf="!loaded">
+    <aa-loader [percentage]="percentageValue"></aa-loader>
+  </div>
+</section>
+<aa-todo-footer></aa-todo-footer>
