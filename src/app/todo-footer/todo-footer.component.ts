@@ -14,9 +14,8 @@ import {combineLatest} from 'rxjs';
 })
 export class TodoFooterComponent implements OnInit {
 
-  public todos: TodoModel[] = [];
-
-  public currentStatus: any;
+  todos: TodoModel[] = [];
+  currentStatus: any;
 
   constructor(
     private todoService: TodoService,
@@ -33,19 +32,19 @@ export class TodoFooterComponent implements OnInit {
     });
   }
 
-  public getRemainingCount(): number {
+  getRemainingCount(): number {
     return this.todos.filter((todo: TodoModel) => {
       return todo.completed === false;
     }).length;
   }
 
-  public hasCompleted(): boolean {
+  hasCompleted(): boolean {
     return this.todos.filter((todo: TodoModel) => {
       return todo.completed === true;
     }).length !== 0;
   }
 
-  public removeCompleted(): void {
+  removeCompleted(): void {
     this.todoService.removeCompleted();
   }
 

@@ -47,15 +47,15 @@ export class TodoItemComponent {
     return this.todo.completed ? 'complete' : 'incomplete';
   }
 
-  public edit() {
+  edit() {
     this.editing = true;
   }
 
-  public cancelEditing() {
+  cancelEditing() {
     this.editing = false;
   }
 
-  public stopEditing(editedTitle) {
+  stopEditing(editedTitle) {
     if (this.editing) {
       this.editing = false;
       this.todo.setTitle(editedTitle.value);
@@ -67,17 +67,16 @@ export class TodoItemComponent {
     }
   }
 
-  public toggleCompletion() {
+  toggleCompletion() {
     this.todo.completed = !this.todo.completed;
     this.update();
   }
 
-  public remove() {
-    this.itemRemoved.next(this.todo.id);
+  remove() {
+    this.itemRemoved.emit(this.todo.id);
   }
 
-  public update() {
-    this.itemModified.next(this.todo);
+  update() {
+    this.itemModified.emit(this.todo);
   }
-
 }

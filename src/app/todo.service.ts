@@ -7,8 +7,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class TodoService {
 
   private pTodos: BehaviorSubject<TodoModel[]> = new BehaviorSubject<TodoModel[]>([]);
-
-  public todos: Observable<TodoModel[]> = this.pTodos.asObservable();
+  todos: Observable<TodoModel[]> = this.pTodos.asObservable();
 
   constructor() {
     const persistedTodos = JSON.parse(localStorage.getItem('todos')) || [];
@@ -23,39 +22,39 @@ export class TodoService {
     this.pTodos.next(TODOS);
   }
 
-  public removeCompleted(): void {
+  removeCompleted(): void {
     const todos = this.pTodos.getValue();
     const remainingTodos = todos.filter((todo: TodoModel) => {
       return todo.completed === false;
     });
     this.pTodos.next(remainingTodos);
-    this._persist();
+    this.persist();
   }
 
-  public setCompletedToAll(completed: boolean): void {
+  setCompletedToAll(completed: boolean): void {
     const todos = this.pTodos.getValue();
     todos.forEach((todo) => todo.completed = completed);
     this.pTodos.next(todos);
-    this._persist();
+    this.persist();
   }
 
-  public add(title): void {
+  add(title): void {
     const todos = this.pTodos.getValue();
     todos.push(new TodoModel(title));
     this.pTodos.next(todos);
-    this._persist();
+    this.persist();
   }
 
-  public remove(id): void {
+  remove(id): void {
     const todos = this.pTodos.getValue();
     const newTodo = todos.filter((t: TodoModel) => {
       return t.id !== id;
     });
     this.pTodos.next(newTodo);
-    this._persist();
+    this.persist();
   }
 
-  public update(newTodo: TodoModel): void {
+  update(newTodo: TodoModel): void {
     let newTodos = this.pTodos.getValue();
     newTodos = newTodos.map((todo: TodoModel) => {
       if (newTodo.id === todo.id) {
@@ -66,23 +65,11 @@ export class TodoService {
     });
 
     this.pTodos.next(newTodos);
-    this._persist();
+    this.persist();
   }
 
-  public toggleCompletion(id): void {
-    const todos = this.pTodos.getValue();
-    const todo = todos.find((t: TodoModel) => t.id === id);
-
-    if (todo) {
-      todo.completed = !todo.completed;
-      this.pTodos.next(todos);
-      this._persist();
-    }
-  }
-
-  private _persist(): void {
+  private persist(): void {
     const todos = this.pTodos.getValue();
     localStorage.setItem('todos', JSON.stringify(todos));
   }
-
 }

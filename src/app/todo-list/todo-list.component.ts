@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {animateChild, query, transition, trigger, useAnimation} from '@angular/animations';
 
@@ -32,20 +32,16 @@ import {combineLatest} from 'rxjs';
 })
 export class TodoListComponent implements OnInit {
 
-  public loaded = false;
-
-  public percentageValue = 0;
-
-  public disableAnimation = false;
-
-  private todos: TodoModel[] = [];
+  loaded = false;
+  percentageValue = 0;
+  disableAnimation = false;
+  todos: TodoModel[] = [];
 
   private lastStatus: string;
 
   constructor(
     private todoService: TodoService,
-    private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -116,7 +112,7 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  public hasCompleted(): boolean {
+  hasCompleted(): boolean {
     const completed = this.todos.filter((todo: TodoModel) => {
       return todo.completed === true;
     });
@@ -124,20 +120,19 @@ export class TodoListComponent implements OnInit {
     return completed.length !== 0;
   }
 
-  public setAllTo(completed: any): void {
+  setAllTo(completed: any): void {
     this.todoService.setCompletedToAll(completed.checked);
   }
 
-  public remove(id: string): void {
+  remove(id: string): void {
     this.todoService.remove(id);
   }
 
-  public update(todo: TodoModel): void {
+  update(todo: TodoModel): void {
     this.todoService.update(todo);
   }
 
-  public trackById(index, item): number {
+  trackById(index, item): number {
     return item.id;
   }
-
 }

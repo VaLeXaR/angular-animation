@@ -5,7 +5,7 @@ import {RouterOutlet} from '@angular/router';
 @Component({
   selector: 'aa-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   animations: [
     trigger('routeAnimation', [
       transition('completed <=> all, active <=> all, active <=> completed', [
@@ -35,5 +35,4 @@ export class AppComponent {
       return outlet.activatedRouteData.status || 'all';
     }
   }
-
 }

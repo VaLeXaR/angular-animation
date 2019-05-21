@@ -10,15 +10,14 @@ import {TodoService} from '../todo.service';
 })
 export class TodoHeaderComponent {
 
-  @ViewChild('newTodo') public newTodoEl: ElementRef;
+  @ViewChild('newTodo') newTodoEl: ElementRef;
 
   constructor(
     private todoService: TodoService
   ) { }
 
-  public addTodo(title: string): void {
+  addTodo(title: string): void {
     this.todoService.add(title);
     this.newTodoEl.nativeElement.value = '';
   }
-
 }
