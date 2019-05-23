@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {LoaderComponent} from './loader/loader.component';
 import {TodoFooterComponent} from './todo-footer/todo-footer.component';
 import {TodoHeaderComponent} from './todo-header/todo-header.component';
 import {TodoListComponent} from './todo-list/todo-list.component';
@@ -20,8 +19,7 @@ import {TodoService} from './todo.service';
     TodoItemComponent,
     TodoFooterComponent,
     TodoHeaderComponent,
-    TrimPipe,
-    LoaderComponent
+    TrimPipe
   ],
   imports: [
     BrowserModule,

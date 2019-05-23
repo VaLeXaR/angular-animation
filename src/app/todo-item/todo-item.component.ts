@@ -12,11 +12,11 @@ import {TodoModel} from '../todo.model';
     trigger('stateAnimation', [
       state('incomplete', style({
         color: 'black',
-        'text-decoration': 'none'
+        textDecoration: 'none'
       })),
       state('complete', style({
         color: '#d9d9d9',
-        'text-decoration': 'line-through'
+        textDecoration: 'line-through'
       })),
       transition('incomplete => complete', [
         style({
@@ -30,6 +30,15 @@ import {TodoModel} from '../todo.model';
         }),
         animate('0.2s')
       ])
+    ]),
+    trigger('todoAnimation', [
+      transition(':enter', [
+        style({ height: 0 }),
+        animate('0.3s ease-in', style({ height: '*' }))
+      ]),
+      transition(':leave', [
+        animate('0.3s ease-out', style({ transform: 'scale(0)' }))
+      ]),
     ])
   ]
 })
@@ -42,6 +51,8 @@ export class TodoItemComponent {
   @Output() itemRemoved = new EventEmitter();
 
   public editing = false;
+
+  @HostBinding('@todoAnimation') true;
 
   @HostBinding('@stateAnimation') get state() {
     return this.todo.completed ? 'complete' : 'incomplete';
