@@ -4,8 +4,7 @@ import {TodoListComponent} from './todo-list/todo-list.component';
 
 const routes: Routes = [
   { path: '', component: TodoListComponent, pathMatch: 'full' },
-  { path: 'active', component: TodoListComponent, data: { status: 'active' } },
-  { path: 'completed', component: TodoListComponent, data: { status: 'completed' } }
+  { path: ':status', component: TodoListComponent }
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
 import {map} from 'rxjs/operators';
@@ -11,13 +11,12 @@ import {combineLatest} from 'rxjs';
 @Component({
   selector: 'aa-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss'],
+  styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, AfterViewInit {
 
   disableAnimation = true;
-  todos: TodoModel[] = [];
-
+  private todos: TodoModel[] = [];
   private lastStatus: string;
 
   constructor(
@@ -27,9 +26,10 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     combineLatest(
-      this.route.data.pipe(map(params => params.status)),
+      this.route.params.pipe(map(params => params.status)),
       this.todoService.todos
-    ).subscribe(([status, todos]) => {
+    )
+    .subscribe(([status, todos]) => {
       if (this.lastStatus !== status) {
         this.disableAnimation = true;
       }
@@ -47,6 +47,12 @@ export class TodoListComponent implements OnInit {
         this.todos = todos;
       }
     });
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.disableAnimation = false;
+    }, 0);
   }
 
   hasCompleted(): boolean {

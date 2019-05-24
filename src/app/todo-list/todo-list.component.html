@@ -9,14 +9,11 @@
     [checked]="hasCompleted()"
     (click)="setAllTo(toggleall)"
   >
-  <ul class="todo-list" [@.disabled]="disableAnimation">
-    <li *ngFor="let todo of todos; trackBy: trackById">
-      <aa-todo-item
-        [todo]="todo"
-        (itemRemoved)="remove($event)"
-        (itemModified)="update($event)"
-      ></aa-todo-item>
-    </li>
-  </ul>
+  <div class="todo-list" [@.disabled]="disableAnimation">
+    <aa-todo-item *ngFor="let todo of todos; trackBy: trackById"
+                  [todo]="todo"
+                  (itemRemoved)="remove($event)"
+                  (itemModified)="update($event)"></aa-todo-item>
+  </div>
 </section>
 <aa-todo-footer></aa-todo-footer>
