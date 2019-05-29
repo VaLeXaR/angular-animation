@@ -41,7 +41,7 @@ export class TodoItemComponent {
 
   @Output() itemRemoved = new EventEmitter();
 
-  public editing = false;
+  editing = false;
 
   @HostBinding('@stateAnimation') get state() {
     return this.todo.completed ? 'complete' : 'incomplete';
