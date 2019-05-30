@@ -30,10 +30,8 @@ import { AnimationBuilder, AnimationPlayer, style, animate } from '@angular/anim
 export class LoaderComponent {
 
   @ViewChild('loadingBar')
-  public loadingBar;
-
-  public player: AnimationPlayer;
-
+  loadingBar;
+  player: AnimationPlayer;
   private percent = 0;
 
   constructor(private builder: AnimationBuilder) {}

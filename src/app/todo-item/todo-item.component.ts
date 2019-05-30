@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 import {TodoModel} from '../todo.model';
@@ -7,7 +7,6 @@ import {TodoModel} from '../todo.model';
   selector: 'aa-todo-item',
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('stateAnimation', [
       state('incomplete', style({
